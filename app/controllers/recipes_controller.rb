@@ -5,5 +5,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    response = Contentful::RecipeService.new.perform(:recipe_details, params[:id])
+    @recipe = response[:data]
   end
 end
