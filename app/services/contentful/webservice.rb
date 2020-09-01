@@ -10,5 +10,9 @@ module Contentful
         environment: ENV['ENV_ID'],
         dynamic_entries: :auto
       )
+    rescue => e
+      e.class.to_s
+    end
+
   end
 end

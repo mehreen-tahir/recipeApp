@@ -9,7 +9,11 @@ module Contentful
     }.freeze
 
     def perform(method_name, *arguments)
-      { data: self.send(method_name, *arguments), status: map_status(:success) }
+      begin
+        { data: self.send(method_name, *arguments), status: map_status(:success) }
+      rescue => e
+        { data: [], status: map_status(e.message)}
+      end
     end
 
     private
@@ -26,6 +30,8 @@ module Contentful
 
     def recipe_details(recipe_id)
       recipe = Webservice.client.entry(recipe_id)
+
+      raise 'not_found' if recipe.nil?
 
       map_recipe_extended(recipe.fields)
     end
