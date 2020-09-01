@@ -23,7 +23,6 @@ RSpec.describe RecipesController do
         expect(json_response.class).to eq Array
         expect(json_response.first.keys).to match_array(["id", "title", "image"])
       end
-
     end
 
     context "request is not successful;" do
@@ -81,7 +80,6 @@ RSpec.describe RecipesController do
         get :show, params: params
         expect(response.status).to eq 401
       end
-
     end
 end
 
